@@ -3,14 +3,6 @@ const readlinesync = require('readline-sync');
 const chalk = require('chalk');
 const figlet = require('figlet');
 
-figlet('It\'s over 9000!!', function(err, data) {
-    if (err) {
-        console.log('Something went wrong...');
-        console.dir(err);
-        return;
-    }
-    console.log(data)
-});
 
 
 //chalk colors
@@ -21,9 +13,6 @@ const bg = chalk.bgMagenta
 const cyan = chalk.cyan;
 
 
-//qna
-
-const users=[];
 
 const questions =[
   {
@@ -34,7 +23,7 @@ const questions =[
   {
     question:'Am i the:',
     options:['overpowered protagonist','underdog'],
-    answer:"overpowered",
+    answer:"overpowered protagonist",
     },
   {
     question:'Am I wicked?',
@@ -106,7 +95,6 @@ const questions =[
 let name = readlinesync.question(orange("Hey Lostsoul, enter your name: "));
 let greeting = readlinesync.keyInYNStrict(orange(`Hello ${name}! Are you ready to go`,));
 
-users.name = name;
 
 if(greeting)
 {
@@ -122,6 +110,9 @@ if(greeting)
         console.log(correct("RIGHT"))
         score++;
       console.log(`Your score is : ${cyan(score)}`);
+          
+    });
+
       }
       else{
         console.log(error("WRONG"));
@@ -129,14 +120,19 @@ if(greeting)
 
       }
     }
+    users.score = score;
 
-    
-users.score = score;
+
 }
 else
 {
   console.log('see ya later,bubyue!!');
 };
+figlet(`Your score is : ${cyan(score)}`, function(err, data) {
+        if (err) {
+            console.log('Something went wrong with figlet...');
+            console.dir(err)
+            console.log(data);
+        }
 
-
-// console.log(users) // needa use local storage.
+// console.log(users) // need to get file access or something related to sytem.io
